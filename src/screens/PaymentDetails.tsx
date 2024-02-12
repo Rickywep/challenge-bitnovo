@@ -71,22 +71,24 @@ export const PaymentDetails = ({ navigation, route }: Props) => {
       />
       <ScrollView>
         {orderInfo && (
-          <CardDetail
-            amount={orderInfo[0].fiat_amount!}
-            currency={orderInfo[0].fiat!}
-            concept={orderInfo[0].notes!}
-            date={orderInfo[0].created_at!}
-          />
+          <>
+            <CardDetail
+              amount={orderInfo[0].fiat_amount!}
+              currency={orderInfo[0].fiat!}
+              concept={orderInfo[0].notes!}
+              date={orderInfo[0].created_at!}
+            />
+            <CardPay
+              paymentId={paymentId}
+              expiration={orderInfo?.[0].expired_time!}
+              cryptoAmount={orderInfo?.[0].crypto_amount!}
+              address={orderInfo?.[0].address!}
+              destinationTag={orderInfo?.[0].tag_memo!}
+              symbol={orderInfo?.[0].currency_id!}
+              navigateToError={navigateToError}
+            />
+          </>
         )}
-        <CardPay
-          paymentId={paymentId}
-          expiration={orderInfo?.[0].expired_time!}
-          cryptoAmount={orderInfo?.[0].crypto_amount!}
-          address={orderInfo?.[0].address!}
-          destinationTag={orderInfo?.[0].tag_memo!}
-          symbol={orderInfo?.[0].currency_id!}
-          navigateToError={navigateToError}
-        />
       </ScrollView>
     </SafeAreaView>
   );
